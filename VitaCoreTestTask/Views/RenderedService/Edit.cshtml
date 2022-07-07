@@ -1,0 +1,50 @@
+﻿@model VitaCoreTestTask.Data.ViewModels.RenderedServiceVM;
+
+@{
+    ViewData["Title"] = "Изменить оказанную услугу";
+}
+
+<h1>Изменить оказанную услугу</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <div class="row">
+                    <div class="col-md-6 mb-6">
+                        <label asp-for="Id_Employee">Сотрудник</label>
+                        <select asp-for="Id_Employee" asp-items="Model.EmployeeList" class="custom-select d-block w-100" required="">
+                            <option value="" disabled="disabled" selected="selected">Выбор...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Пожалуйста выберите сотрудника.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label asp-for="Id_Service">Услуга</label>
+                        <select asp-for="Id_Service" class="custom-select d-block w-100" asp-items="Model.ServiceList" id="state" required="">
+                            <option value="" disabled="disabled" selected="selected">Выбор...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Пожалуйста выберите услугу.
+                        </div>
+                    </div>                
+                </div>
+            <div class="form-group">
+                <label asp-for="ServiceCount" class="control-label"></label>
+                <input asp-for="ServiceCount" class="form-control" type="number" />
+                <span asp-validation-for="ServiceCount" class="text-danger"></span>
+            </div>
+            <input asp-for="Id_VisitLog" type="hidden"/>
+            <input asp-for="Id_RenderedServ" type="hidden"/>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="VisitLog" asp-action="Details" asp-route-id="@Model.Id_VisitLog">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

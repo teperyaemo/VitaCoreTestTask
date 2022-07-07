@@ -1,0 +1,47 @@
+﻿@model VitaCoreTestTask.Data.ViewModels.PetVacVM;
+
+@{
+    ViewData["Title"] = "Добавить прививку";
+}
+
+<h1>Добавить прививку</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden="hidden">
+                <label asp-for="Id_Pet" class="control-label"></label>
+                <input asp-for="Id_Pet" class="form-control"/>
+                <span asp-validation-for="Id_Pet" class="text-danger"></span>
+            </div> 
+             <div class="row">
+                    <div class="col-md-6 mb-6">
+                        <label asp-for="Id_Vaccination">Вид</label>
+                        <select asp-for="Id_Vaccination" asp-items="Model.VaccinationsList" class="custom-select d-block w-100" required="">
+                            <option value="" disabled="disabled" selected="selected">Выбор...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Пожалуйста выберите прививку.
+                        </div>
+                    </div>                                   
+                </div>
+            <div class="form-group">
+                <label asp-for="Period" class="control-label"></label>
+                <input asp-for="Period" class="form-control" type="number"/>
+                <span asp-validation-for="Period" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Pet" asp-action="Details" asp-route-id="@Model.Id_Pet">Вернуться к карточке питомца</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,51 @@
+﻿@model VitaCoreTestTask.Data.ViewModels.VisitLogAddEditVM;
+
+@{
+    ViewData["Title"] = "Добавить посещение";
+}
+
+<h1>Добавить посещение</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                    <div class="col-md-6 mb-6">
+                        <label asp-for="Id_PetOwner">Хозяин</label>
+                        <select asp-for="Id_PetOwner" asp-items="Model.PetOwnerList" class="custom-select d-block w-100" required="">
+                            <option value="" disabled="disabled" selected="selected">Выбор...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Пожалуйста выберите хозяина.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label asp-for="Id_Pet">Питомец</label>
+                        <select asp-for="Id_Pet" class="custom-select d-block w-100" asp-items="Model.PetList" id="state" required="">
+                            <option value="" disabled="disabled" selected="selected">Выбор...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Пожалуйста выберите питомца.
+                        </div>
+                    </div>                
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" type="datetime-local"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

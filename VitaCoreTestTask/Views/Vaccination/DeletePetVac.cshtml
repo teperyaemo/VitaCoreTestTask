@@ -1,0 +1,40 @@
+﻿@model VitaCoreTestTask.Models.PetVaccination
+
+@{
+    ViewData["Title"] = "Удаление";
+}
+
+<h1>Удаление</h1>
+
+<h3>Вы уверены что хотите удалить это?</h3>
+<div>
+    <h4>Прививка питомца</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Pet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Pet)
+        </dd>       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>  
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Period)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Period)
+        </dd> 
+    </dl>
+
+    
+    <form asp-action="DeletePetVac">
+        <input type="hidden" asp-for="Id_Vaccination" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-controller="Pet" asp-action="Details" asp-route-id="Id_Pet">Вернуться к списку</a>
+    </form>
+</div>
